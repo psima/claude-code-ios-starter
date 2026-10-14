@@ -1,6 +1,6 @@
 # Claude Code iOS Starter
 
-A free, drop-in `.claude/` setup that makes [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) safer and more useful on Xcode projects.
+A free Claude Code plugin and drop-in `.claude/` setup that makes [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) safer and more useful on Xcode projects.
 
 Out of the box, AI coding agents trip over iOS projects. They:
 
@@ -19,23 +19,39 @@ This starter fixes the worst of it.
 | `.claude/hooks/format-swift.sh` | Runs `swift-format` on every Swift file Claude touches |
 | `.claude/settings.json` | Lets builds and tests run without approval prompts; keeps `.p8`, `.p12`, provisioning profiles and `.env` off-limits |
 | `.claude/commands/fix-build.md` | `/fix-build`: builds, reads compiler errors, fixes them and loops until the build is green |
-| `CLAUDE.md` | Template for a SwiftUI app: build commands, project rules and layout |
+| `templates/CLAUDE.md` | Template for a SwiftUI app: build commands, project rules and layout |
+| `skills/xcode-project-safety` | Skill that teaches Claude how to build, test and fix Xcode projects safely |
 
 ## Install
+
+### As a plugin (recommended)
+
+Inside Claude Code (v2.1.275+):
+
+```
+/plugin install ios-xcode-starter --marketplace psima/claude-code-ios-starter
+```
+
+Or from your shell:
+
+```bash
+claude plugin marketplace add psima/claude-code-ios-starter
+claude plugin install ios-xcode-starter@psima-ios
+```
+
+You get the two hooks, the `/ios-xcode-starter:fix-build` command and the `xcode-project-safety` skill in every project.
+
+### Copy into one project
 
 From the root of your Xcode project:
 
 ```bash
 git clone https://github.com/psima/claude-code-ios-starter /tmp/cc-ios
 cp -Rn /tmp/cc-ios/.claude .
-cp -n /tmp/cc-ios/CLAUDE.md .
+cp -n /tmp/cc-ios/templates/CLAUDE.md .
 ```
 
-`-n` means existing files are never overwritten. Then fill in the placeholders in `CLAUDE.md`, start `claude`, and try:
-
-```
-/fix-build MyApp
-```
+`-n` means existing files are never overwritten. Fill in the placeholders in `CLAUDE.md`, start `claude`, and try `/fix-build MyApp`.
 
 Requirements: macOS, Xcode 16+, Claude Code.
 
@@ -51,6 +67,8 @@ Requirements: macOS, Xcode 16+, Claude Code.
 - One-command installer
 
 Launch discount: 30% off with code `LAUNCH30`.
+
+Read the walkthrough: [Making Claude Code safe for Xcode projects](https://simaspavlos.medium.com/making-claude-code-safe-for-xcode-projects-4-changes-that-fixed-it-for-me-538ee83b29d8)
 
 ## License
 
