@@ -1,0 +1,1 @@
+{"name":"psima-ios","description":"Claude Code plugins for iOS and macOS developers","owner":{"name":"Pavlos Simas","url":"https://github.com/psima"},"plugins":[{"name":"ios-xcode-starter","source":"./","description":"Blocks .pbxproj/entitlements edits, formats Swift, adds /fix-build and an Xcode build-and-test skill."}]}
